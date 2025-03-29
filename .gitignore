@@ -9,7 +9,6 @@ db.sqlite3-journal
 media
 
 todo.txt
-daily_quotes/settings/.env
 
 requirements.txt
 notes.txt
