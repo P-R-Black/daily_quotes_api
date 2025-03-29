@@ -1,0 +1,228 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    DrinksAPI
+{% endblock %}
+
+{% block main %}
+<main>
+    <section class="hero_section container">
+        <div class="hero_container">
+            <div class="sun_div">
+                <div class="outer_sun">
+                    <div class="inner_sun"></div>
+                </div>
+            </div>
+            <div class="clouds_container">
+                <div class="cloud_one_track_container">
+                    <img src="{% static 'img/cloud1.png' %}" alt="">
+                </div>
+
+                <div class="cloud_two_track_container">
+                    <img src="{% static 'img/clouds.png' %}" alt="">
+                </div>
+
+                <div class="cloud_three_track_container">
+                    <img src="{% static 'img/cloud2.png' %}" alt="">
+                </div>
+            </div>
+            <div class="quotes_display_container">
+                {% if selected_quote %}
+                <div class="quotes_container">
+                    <p class="quote">
+                        {{ selected_quote.text }}
+                    </p>
+                </div>
+                <div class="author_tags_container">
+                    <p class="author">{{ selected_quote.name }}</p>
+                </div>
+                {% else %}
+                <div class="quotes_container">
+                    <p class="quote">
+                        {{ daily_quote.text }}
+                    </p>
+                </div>
+                <div class="author_tags_container">
+                    <p class="author">{{ daily_quote.author.name }}</p>
+                </div>
+                {% endif %}
+            </div>
+            <div class="tag_options_container">
+                <div class="displayed_tags_container">
+                    <form action="" method="GET" class="selection_form">
+                        {% csrf_token %}
+                        <ul class="tags_container">
+                            {% for t in tags|slice:":4" %}
+                            <li><input name="selected_value" class="select_button tag_button" type="submit" value="{{ t|capfirst }}"></li>
+                            {% endfor %}
+
+                            {% for a in authors|slice:":3" %}
+                            <li><input name="selected_value" class="select_button tag_button" type="submit" value="{{ a|capfirst }}"></li>
+                            {% endfor %}
+                            <li><button class="select_button" id="expandButton">More</button></li>
+                        </ul>
+                    </form>
+                    <form action="" method="POST" class="get_quote_form">
+                        <div id="messageBox"></div>
+                        {% csrf_token %}
+                        <input type="submit" class="select_button" value="Get Quote">
+                    </form>
+                </div>
+                <div class="hidden_tags_container ">
+                    <form action="" method="GET" class="secondary_selection_form">
+                        <ul class="secondary_tags_container">
+                            {% for a in authors %}
+                            <li class="author_names"><input name="selected_value" class="more_options_button tag_button" type="submit" value="{{ a|capfirst }}"></li>
+                            {% endfor %}
+
+                            {% for t in tags %}
+                            <li><input name="selected_value" class="more_options_button tag_button" type="submit" value="{{ t|capfirst}}"></li>
+                            {% endfor %}
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="hero_section_lower container" id="createPost">
+        <div class="hero_container">
+            <div class="title_container">
+                <h2>Create a Post</h2>
+            </div>
+            <div class="create_post_container">
+                <div class="layout_and_colors">
+                    <div class="layout_choice">
+                        <h3>Layout</h3>
+                        <form action="" method="post" id="layoutForm">
+                            {% csrf_token %}
+                            <div class="choice_box">
+                                <input class="picStyleButton" type="submit" name="instagram" value="Instagram">
+                                <input class="picStyleButton" type="submit" name="tiktok" value="TikTok">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="background_color_container">
+                        <h3>Background Color</h3>
+                         <form action=""  method="post">
+                             {% csrf_token %}
+                            <div class="colors_box">
+                                <input type="button"  name="whiteButton" class="bgColorButton whiteButton" id="whiteButton">
+                                <input type="button"  name="blackButton" class="bgColorButton blackButton" id="blackButton">
+                                <input type="button"  name="redButton" class="bgColorButton redButton" id="redButton">
+                                <input type="button"  name="blueButton" class="bgColorButton blueButton" id="blueButton">
+                                <input type="button"  name="greenButton" class="bgColorButton greenButton" id="greenButton">
+                                <input type="button"  name="orangeButton" class="bgColorButton orangeButton" id="orangeButton">
+                                <input type="button"  name="yellowButton" class="bgColorButton yellowButton" id="yellowButton">
+                                <input type="button"  name="violetButton" class="bgColorButton violetButton" id="violetButton">
+
+                                <input type="button"  name="grayButton" class="bgColorButton grayButton" id="grayButton">
+                                <input type="button"  name="lightBlackButton" class="bgColorButton lightBlackButton" id="lightBlackButton">
+                                <input type="button"  name="pinkButton" class="bgColorButton pinkButton" id="pinkButton">
+                                <input type="button"  name="lightBlueButton" class="bgColorButton lightBlueButton" id="lightBlueButton">
+                                <input type="button"  name="darkGreenButton" class="bgColorButton darkGreenButton" id="darkGreenButton">
+                                <input type="button"  name="darkPurpleButton" class="bgColorButton darkPurpleButton" id="darkPurpleButton">
+                                <input type="button"  name="tealButton" class="bgColorButton tealButton" id="tealButton">
+                                <input type="button"  name="darkBlueButton" class="bgColorButton darkBlueButton" id="darkBlueButton">
+                            </div>
+                         </form>
+                    </div>
+                    <div class="font_color_container">
+                        <h3>Font Color</h3>
+                         <form action="" method="post">
+                             {% csrf_token %}
+                            <div class="colors_box">
+                                <input type="button" name="whiteFontButton" class="fontColorButton whiteFontButton" id="whiteFontButton">
+                                <input type="button" name="blackFontButton" class="fontColorButton blackFontButton" id="blackFontButton">
+                                <input type="button" name="redFontButton" class="fontColorButton redFontButton" id="redFontButton">
+                                <input type="button" name="blueFontButton" class="fontColorButton blueFontButton" id="blueFontButton">
+                                <input type="button" name="greenFontButton" class="fontColorButton greenFontButton" id="greenFontButton">
+                                <input type="button" name="orangeFontButton" class="fontColorButton orangeFontButton" id="orangeFontButton">
+                                <input type="button" name="yellowFontButton" class="fontColorButton yellowFontButton" id="yellowFontButton">
+                                <input type="button" name="violetFontButton" class="fontColorButton violetFontButton" id="violetFontButton">
+                            </div>
+                          </form>
+                    </div>
+                    <div class="text_shadow_container">
+                        <h3>Text Shadow</h3>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="shadow_box">
+                                <div class="shadowButtonHolder">
+                                    <input type="button" name="noShadow" class="shadowButton" id="noShadowButton">
+                                    <span class="tooltip-text">No Shadow</span>
+                                </div>
+                                <div class="shadowButtonHolder">
+                                    <input type="button" name="littleShadow" class="shadowButton" id="littleShadowButton">
+                                    <span class="tooltip-text">Little Shadow</span>
+                                </div>
+                                <div class="shadowButtonHolder">
+                                    <input type="button" name="mediumShadow" class="shadowButton" id="mediumShadowButton">
+                                    <span class="tooltip-text">Medium Shadow</span>
+                                </div>
+                                <div class="shadowButtonHolder">
+                                    <input type="button" name="largeShadow" class="shadowButton" id="largeShadowButton">
+                                    <span class="tooltip-text">Large Shadow</span>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="create_quote_post_button">
+
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="get_quote_continer">
+
+                            {% comment %}
+                            <button class="select_button">Get Quote</button>
+                            {% endcomment %}
+
+                            <input type="submit" class="select_button second_quote_button" value="Get Quote">
+                        </div>
+                    </form>
+                </div>
+                <div class="diagram_download_container">
+                    <div class="picture_box_container">
+                        <div class="picture_box" id="picture_box">
+                            <div class="quote_in_pic" id="quote_in_pic">
+                                <p class="picture_quote" id="picture_quote"></p>
+                            </div>
+                            <div class="author_in_pic" id="author_in_pic">
+                                <p class="picture_author" id="picture_author"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="get_quote_container">
+                        <form method="POST" action="{% url 'base_quotes:download_image' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="download">
+                            <input type="hidden" name="layout" id="layoutInput">
+                            <input type="hidden" name="background_color" id="bgColorInput">
+                            <input type="hidden" name="font_color" id="fontColorInput">
+                            <input type="hidden" name="quote_text" id="quoteTextInput">
+                            <button type="submit" id="download-button" class="select_button second_quote_button">Download Image</button>
+                        </form>
+
+                        {% comment %}
+                        <form action="{% url 'base_quote:download-image' %}" method="get">
+                            {% csrf_token %}
+                            <button name="download_value" class="select_button"><a href="/" download>Download</a></button>
+                        </form>
+                        {% endcomment %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script type="text/javascript">
+     {% comment %}
+        const layout = "{{layout|escapejs }}"
+     {% endcomment %}
+</script>
+{% endblock %}>
+

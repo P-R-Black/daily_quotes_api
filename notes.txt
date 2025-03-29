@@ -1,0 +1,4 @@
+# Turning on Celery to get daily quote from task.py
+1. start server
+2. in one terminal | celery -A daily_quotes worker --loglevel=info
+3. in second terminal |  celery -A daily_quotes beat --loglevel=info

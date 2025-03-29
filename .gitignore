@@ -1,0 +1,34 @@
+### Django ##
+*.log
+*.pot
+*.pyc
+__pycache__/
+development.py
+db.sqlite3
+db.sqlite3-journal
+media
+
+todo.txt
+daily_quotes/settings/.env
+
+requirements.txt
+notes.txt
+celerybeat-schedule.db
+quotes_api/management/commands/populate_db.py
+
+
+.coverage
+.coverage.*
+.cache
+.notsettests.xml
+coverage.xml
+
+# Environments #
+daily_quotes/settings/.env
+.env
+.venv
+.env/
+.venv/
+daily_quotes.log
+downloaded_quotes.log
+

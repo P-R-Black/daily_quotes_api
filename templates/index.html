@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="Daily Quote API API">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="https://paulrblack.com/dailyquotesapi">
+    <meta property="og:description" content="An API that returns random quotes">
+    <meta property="og:local" content="en_US">
+    <meta property="og:site_name" content="Daily Quotes">
+    <meta name="keywords" content="Quotes Inspiration Motivation">
+    <meta name="author" content="Paul Black">
+    <meta name="twitter:widgets:autoload" content="off">
+
+    <!-- BoxIcons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/27e86509c5.js" crossorigin="anonymous"></script>
+
+    <link rel=canonical" href="/">
+    <link rel="me" href="https://twitter.com/TwitterDev">
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index_mobile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_quotes/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_quotes/home_mobile.css' %}">
+      <link rel="stylesheet" href="{% static 'css/base_quotes/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_quotes/about_mobile.css' %}">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/favicon/site.webmanifest' %}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="inner_nav_container">
+                <div class="navbar_logo_container">
+                    <h2 class="logo" tabindex="-" aria-label="home logo"><a href="/">Daily Quotes</a></h2>
+                </div>
+                <div class="navbar_items">
+                    <ul class="navbar_menu" data-visible="false">
+                        <li class="navbar_item"><a class="navbar_links" href="/">Home</a></li>
+                        <li><a href="#createPost">Create</a></li>
+                        <li class="navbar_item"><a class="navbar_links" href="{% url 'base_quotes:about_page' %}">About</a></li>
+                        <li class="navbar_item"><a class="navbar_links" href="{% url 'base_quotes:docs_page' %}">Docs</a></li>
+                        <li class="navbar_item">
+                            <div class="moon-sun">
+                                <i class='bx bx-moon icon moon toggle-switch'></i>
+                                <i class='bx bx-sun icon sun toggle-switch hide'></i>
+                            </div>
+                        </li>
+                        {% comment %}
+                        <li class="navbar_item"><a class="navbar_links twitter-follow-button"  rel="me"  href="https://twitter.com/JuanJohn81" data-dnt="true"  target="_blank">Tweet</a></li>
+                        {% endcomment %}
+                    </ul>
+                    <div class="hamburger_menu" id="mobile_menu" aria-controls="navbar_menu" aria-expanded="false">
+                        <span class="bar sr-only"></span>
+                        <span class="bar sr-only"></span>
+                        <span class="bar sr-only"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% block main %}
+
+{% endblock %}
+<footer>
+    <div class="container">
+        <div class="footer_container">
+            <div class="navbar_logo">
+                <h2 class="logo" tabindex="0" aria-label="home logo"><a href="/">Daily Quotes</a></h2>
+                <a class="navbar_created" href="https://paulrblack.com">Created By: Paul B</a>
+            </div>
+            <div class="rights_reserved">
+                <p>&copy; Daily Quotes<span class="rights_year"> {{ year }}.</span></p>
+                <p>All Rights Reserved</p>
+            </div>
+
+            <div class="footer_link_block">
+                <ul class="footer_menu">
+                    <li class="footer_item">
+                        <a class="footer_links" href="/">Home</a>
+                    </li>
+                    <li class="footer_item">
+                        <a class="footer_links" href="#createPost">Create</a>
+                    </li>
+                    <li class="footer_item">
+                        <a class="footer_links" href="{% url 'base_quotes:about_page' %}">About</a>
+                    </li>
+                     <li class="footer_item">
+                        <a class="footer_links" href="{% url 'base_quotes:docs_page' %}">Docs</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

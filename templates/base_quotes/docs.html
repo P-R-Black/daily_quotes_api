@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+    DrinksAPI
+{% endblock %}
+
+{% block main %}
+<main>
+    <section class="about_section">
+        <div class="container">
+            <div class="aboutApiDataContainer">
+                <div class="pageTitleContainer">
+                    <h2>DrinksAPI Docs</h2>
+                </div>
+
+                <div class="aboutInfoContainer">
+                    <div class="aboutDataContainer">
+                        <div class="aboutDataTitle">
+                            Basic Information
+                        </div>
+                        <div class="aboutDataText">
+                            <p>
+                                At this time only the HTTP GET method is available for the Daily Quote API.
+                                The Daily Quote API is for counsumption only, and does not require authentication.
+                            </p>
+                            <p>
+                                This API is free to use and does not have a rate limit, but in order to keep
+                                hosting cost down, I ask that you limit the frequency of your requests.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="aboutDataContainer">
+                        <div class="aboutDataTitle">
+                            Fair Use Policy
+                        </div>
+                        <div class="aboutDataText">
+                            <p>
+                                The Daily Quote API is free to use and generally serves as a data set for aspiring
+                                developers to practice with. Service attacks and other actions that go against
+                                the fair and responsible use of the API will not be tolerated. Users who fail
+                                to comply with the fair use policy will have their IP address permanently bannded.
+                            </p>
+                            <div class="userEtiquetteContainer">
+                                <div class="etiquetteTitle">
+                                    <h3>User Etiquette</h3>
+                                </div>
+                                <div class="etiquetteListContainer">
+                                    <ul>
+                                        <li>Be courteous and helpful to fellow developers.</li>
+                                        <li>Locally cache API resources when they are requested.</li>
+                                        <li>
+                                            <a href="mailto:pblackdevdemo@gmail.com?subject=There's an issue with the DrinksAPI!">
+                                                Report
+                                            </a>
+                                            vulnerabilities responsibly when spotted.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="aboutDataContainer">
+                        <div class="aboutDataTitle">
+                            Contact
+                        </div>
+                        <div class="aboutDataText">
+                            <p>For questions, comments, or concerns, I can be contacted
+                                <a href="mailto:pblackdevdemo@gmail.com?subject=Contact from DrinksAPI! "><span> here</span>.</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}>
+
