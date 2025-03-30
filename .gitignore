@@ -31,3 +31,4 @@ daily_quotes/settings/.env
 daily_quotes.log
 downloaded_quotes.log
 
+# need to remove file
