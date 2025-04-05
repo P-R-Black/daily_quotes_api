@@ -90,6 +90,8 @@ class HomePageView(TemplateView):
     def post(self, request, *args, **kwargs):
         selected_tag = request.session.get('selected_tag')
         selected_author = request.session.get('selected_author')
+        api_response = None
+
 
         if selected_tag:
             api_response = requests.get(f'http://localhost:8000/api/v1/quotes/{selected_tag}')
@@ -109,7 +111,39 @@ class HomePageView(TemplateView):
         })
 
 
-def about_page(request):
+def about_page(request, *args, **kwargs):
+    api_by_tag = None
+
+    if not request.POST.get('selected_value'):
+        selected_value = "President"
+    else:
+        selected_value = request.POST.get('selected_value')
+
+
+    if selected_value:
+        if Tag.objects.filter(name__iexact=selected_value).exists():
+            api_by_tag = requests.get(f'http://localhost:8000/api/v1/quotes/{slugify(selected_value)}')
+        elif Author.objects.filter(name__iexact=selected_value).exists():
+            api_by_tag = requests.get(f'http://localhost:8000/api/v1/quotes/author/{slugify(selected_value)}')
+
+        full_api_by_tag = api_by_tag.json()
+
+
+        tags_data = {
+            "drfapi": full_api_by_tag['drfapi'],
+            "info": full_api_by_tag['info'],
+            "servers": full_api_by_tag['servers'],
+            "external_docs": full_api_by_tag['external_docs'],
+            "security": full_api_by_tag['security'],
+            "count": full_api_by_tag['quotes']['count'],
+            "next": full_api_by_tag['quotes']['next'],
+            "previous": full_api_by_tag['quotes']['previous'],
+            "results": full_api_by_tag['quotes']['results'],
+        }
+
+        # Otherwise, render the full template
+        return render(request, 'base_quotes/about.html', {'tags_data': tags_data})
+
     return render(request, 'base_quotes/about.html')
 
 def docs_page(request):
@@ -122,12 +156,12 @@ def is_ajax(request):
 
 
 def generate_image(request):
-    INSTAGRAM_QUOTE_MARGIN_LEFT: int = 20
+    INSTAGRAM_QUOTE_MARGIN_LEFT: int = 40
     INSTAGRAM_QUOTE_MARGIN_TOP: int = 20
-    INSTAGRAM_QUOTE_MARGIN_RIGHT: int = 20
+    INSTAGRAM_QUOTE_MARGIN_RIGHT: int = 40
     INSTAGRAM_QUOTE_MARGIN_BOTTOM: int = 300
     INSTAGRAM_FONT_SIZE: int = 100
-    INSTAGRAM_LINE_SPACING: int = 10
+    INSTAGRAM_LINE_SPACING: int = 15
 
     TIKTOK_QUOTE_MARGIN_LEFT: int = 20
     TIKTOK_QUOTE_MARGIN_TOP: int = 20
@@ -145,7 +179,7 @@ def generate_image(request):
         quote = get_post['quote']
         author = get_post['author']
         shadow_option = get_post['shadow']
-
+        font_style = get_post['font_style']
 
         # Log the download event
         logging.info(f'Download: "{image_style.lower()}" - "{quote}" - "{author}"')
@@ -172,7 +206,11 @@ def generate_image(request):
         text_area_width = width - (left_margin + right_margin)
         text_area_height = height - (top_margin + bottom_margin)
 
-        font_path =  "static/font/blinker/Blinker-Regular.ttf"
+        if font_style == "Blinker":
+            font_path =  "static/font/blinker/Blinker-Regular.ttf"
+        else:
+            font_path = "static/font/blinker/AbrilFatface-Regular.ttf"
+
 
         image = Image.new("RGB", (width, height), background_color)
         draw = ImageDraw.Draw(image)
@@ -244,7 +282,6 @@ def fit_text_with_wrapping(draw, img_font_size, img_font_color, text, author, fo
 
     font_size = img_font_size
     font = ImageFont.truetype(font_path, font_size)
-
 
     # Adjust font size to fit within max_width and max_height
     while True:

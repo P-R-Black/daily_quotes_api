@@ -64,7 +64,7 @@
                         </ul>
                     </form>
                     <form action="" method="POST" class="get_quote_form">
-                        <div id="messageBox"></div>
+                        <div id="messageBox" class="messageBox hide"></div>
                         {% csrf_token %}
                         <input type="submit" class="select_button" value="Get Quote">
                     </form>
@@ -168,20 +168,36 @@
                             </div>
                         </form>
                     </div>
+                    <div class="font_style_container">
+                        <h3>Font Type</h3>
+                        <form action="">
+                            {% csrf_token %}
+                            <div class="font_style_box">
+                                <input  class="font_style_button" type="submit" name="Abril Fatface" value="Abril Fatface">
+                                <input  class="font_style_button" type="submit" name="Blinker" value="Blinker">
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="create_quote_post_button">
+                    <form action="" method="POST" class="get_quote_continer">
+                        <div id="messageBoxTwo" class="messageBox hide"></div>
+                        {% csrf_token %}
+                        <input type="submit" class="select_button" name="get_quote" value="Get Quote">
+                    </form>
 
+                     {% comment %}
                     <form action="" method="POST">
                         {% csrf_token %}
                         <div class="get_quote_continer">
 
-                            {% comment %}
                             <button class="select_button">Get Quote</button>
-                            {% endcomment %}
+
 
                             <input type="submit" class="select_button second_quote_button" value="Get Quote">
                         </div>
                     </form>
+                    {% endcomment %}
                 </div>
                 <div class="diagram_download_container">
                     <div class="picture_box_container">
@@ -204,14 +220,6 @@
                             <input type="hidden" name="quote_text" id="quoteTextInput">
                             <button type="submit" id="download-button" class="select_button second_quote_button">Download Image</button>
                         </form>
-
-                        {% comment %}
-                        <form action="{% url 'base_quote:download-image' %}" method="get">
-                            {% csrf_token %}
-                            <button name="download_value" class="select_button"><a href="/" download>Download</a></button>
-                        </form>
-                        {% endcomment %}
-
                     </div>
                 </div>
             </div>

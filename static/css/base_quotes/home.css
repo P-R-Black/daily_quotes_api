@@ -188,8 +188,14 @@
 .displayed_tags_container{
     align-items: center;
     display: grid;
-    grid-template-columns: 80% 15%;
+    grid-template-columns: 80% 20%;
+    height: auto;
     justify-content: space-between;
+
+}
+
+.selection_form {
+    width: 100%;
 }
 
 
@@ -198,7 +204,7 @@
     display: grid;
     grid-template-columns: repeat(4, 25%);
     gap: .45rem;
-    width: 80%;
+    width: 90%;
 }
 
 .get_quote_form{
@@ -210,12 +216,17 @@
     width: 100%;
 }
 
-#messageBox{
+
+#messageBox, #messageBoxTwo{
     font-size: 1rem;
     color: orange;
     font-weight: 300;
     margin-bottom: 1rem;
     width: auto;
+}
+
+.messageBoxTwo.hide{
+    display: none;
 }
 
 
@@ -225,6 +236,7 @@
     display: flex;
     justify-content: center;
     width: 80%;
+
 }
 
 .secondary_tags_container{
@@ -274,6 +286,16 @@
 
 
 
+.get_quote_continer{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+
+}
 
 
 
@@ -318,9 +340,7 @@
 }
 
 
-.get_quote_continer{
-    width: 13%;
-}
+
 
 */
 
@@ -461,7 +481,8 @@
 .layout_choice h3,
 .background_color_container h3,
 .font_color_container h3,
-.text_shadow_container h3{
+.text_shadow_container h3,
+.font_style_container h3{
     color: var(--light-bg-font-color);
     font-weight: 400;
     margin-bottom: .5rem;
@@ -477,7 +498,8 @@
     width: 100%;
 }
 
-.choice_box input{
+.choice_box input,
+.font_style_box input{
     border-radius: 2.5px;
     cursor: pointer;
     height: 1.5rem;
@@ -663,10 +685,13 @@
     opacity: 0;
     padding: 10px 15px;
     position: absolute;
-    right: 65%;
-    /* transform: translateX(-50%); */
+    left: 15%;
+
+    /*
+    transform: translateX(-50%);
+    */
     text-align: center;
-    top: 60%;
+
     transition: opacity 0.3s ease, visibility 0.3s ease;
     visibility: hidden;
     white-space: wrap;
@@ -677,4 +702,16 @@
 .shadowButtonHolder:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
+}
+
+
+.font_style_container{
+
+}
+.font_style_box{
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    width: 100%;
 }

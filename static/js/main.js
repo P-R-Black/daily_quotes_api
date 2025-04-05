@@ -5,10 +5,14 @@ const nav = body.querySelector('nav')
 const modeText = body.querySelector('.mode-text')
 // const navLogoText = body.querySelector('.logo-text')
 
+const moon = body.querySelector('.moon')
+const sun = body.querySelector('.sun')
+
 //const mobileMoon = body.querySelector('.mobile-moon')
 //const mobileSun = body.querySelector('.mobile-sun')
 //const mobileSearchBox = body.querySelector('.mobile-search-box')
 //const mobileSearchIcon = body.querySelector('#mobile-search-icon')
+
 
 
 // Star maker
@@ -17,7 +21,8 @@ const newStarMaker = () => {
     let starCount = 500;
     let scene = body.querySelector(".hero_container");
 
-    while (starIndex <= starCount){
+    if (scene != null){
+        while (starIndex <= starCount){
         let star = document.createElement('div');
         let x = Math.floor(Math.random() * window.innerWidth);
         let y = Math.floor(Math.random() * window.innerHeight);
@@ -37,7 +42,10 @@ const newStarMaker = () => {
 
         scene.appendChild(star)
          starIndex += 1;
+        }
     }
+
+
 }
 
 
@@ -51,6 +59,8 @@ const darkLightModeToggle = () => {
 
         if (body.classList.contains("dark")) {
             localStorage.setItem('darkMode', 'enabled');
+            moon.classList.remove('hide')
+            sun.classList.add('hide')
              newStarMaker();
 
         } else {
@@ -63,12 +73,18 @@ const darkLightModeToggle = () => {
     })
 }
 
+// update icons
+if (body.classList.contains("dark") && sun.classList.contains('hide') ){
+    console.log('sun',  sun.getAttribute("class"))
+}
+
 
 
 
 const removeStars = () => {
-    console.log('removeStars called')
     document.querySelectorAll('.starScene').forEach(star => star.remove())
+    sun.classList.remove('hide')
+    moon.classList.add('hide')
 }
 
 
@@ -266,6 +282,27 @@ shadow.addEventListener('click', (event) => {
 })
 
 
+// Get Font Type
+const fontStyleButton = document.querySelectorAll('.font_style_button')
+let fontStyle = "Blinker"
+
+fontStyleButton.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault()
+        selectFontStyle = button.getAttribute("name")
+        if (selectFontStyle === "Abril Fatface"){
+            fontStyle = "Abril Fatface";
+        } else {
+            fontStyle = "Blinker";
+        }
+        pictureQuote.style.fontFamily = fontStyle;
+        pictureAuthor.style.fontFamily = fontStyle;
+    })
+})
+
+
+
+
 // place quote text on canvas
 const quote = document.querySelector('.quote')
 const quoteAuthor = document.querySelector('.author')
@@ -275,11 +312,11 @@ const authorInPic = document.getElementById('author_in_pic')
 const adjustQuoteBox = (currPicStyle) => {
     if(currPicStyle === "Instagram"){
      quoteInPic.style.marginTop = "-10px"
-        quoteInPic.style.width = "340px";
+        quoteInPic.style.width = "320px";
         quoteInPic.style.height = "280px";
         // quoteInPic.style.border = '1px solid red';
 
-        authorInPic.style.width = '340px'
+        authorInPic.style.width = '320px'
         authorInPic.style.height = '32px'
         // authorInPic.style.border = '1px solid blue'
 
@@ -288,12 +325,12 @@ const adjustQuoteBox = (currPicStyle) => {
     }
 
      if(currPicStyle === "TikTok"){
-        quoteInPic.style.width = "260px";
+        quoteInPic.style.width = "240px";
         quoteInPic.style.height = "340px";
         quoteInPic.style.marginTop = "-35px"
         // quoteInPic.style.border = '1px solid red';
 
-        authorInPic.style.width = '260px';
+        authorInPic.style.width = '240px';
         authorInPic.style.height = '32px';
         // authorInPic.style.border = '1px solid blue'
 
@@ -322,7 +359,6 @@ const adjustQuoteSize = (quote, boxWidth, boxHeight, quoteAuthor, authorBoxWidth
     }
 
 
-
     // Adjust author name size
     let authorStyles = window.getComputedStyle(quoteAuthor, null);
     let authorFont = authorStyles.getPropertyValue('font-size');
@@ -346,10 +382,15 @@ const adjustQuoteSize = (quote, boxWidth, boxHeight, quoteAuthor, authorBoxWidth
 var expandButton = document.getElementById('expandButton');
 var hiddenTagContainer = document.querySelector('.hidden_tags_container')
 
-expandButton.addEventListener('click', (e) => {
+if (expandButton !== null){
+    expandButton.addEventListener('click', (e) => {
     e.preventDefault();
     hiddenTagContainer.classList.toggle('show');
-});
+    });
+}
+
+
+
 
 
 
@@ -369,12 +410,16 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Selected:', selectedValue);
 
-            const messageBox = document.getElementById('messageBox');
-            if (messageBox) {
-                messageBox.innerHTML = `${selectedValue}`;
-            }
+            const messageBox = document.querySelectorAll('.messageBox')
+
+            messageBox.forEach((mb) => {
+                if (mb){
+                    mb.classList.remove('hide')
+                    mb.innerHTML  = `${selectedValue}`;
+                }
+
+            })
 
             // Close the hidden tag container after selection
             if(hiddenTagContainer.classList.contains('show')){
@@ -394,17 +439,38 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', handleTagSelection);
     });
 
-    secondQuoteButton.addEventListener('click', (e) => {
+    if(secondQuoteButton !== null){
+        secondQuoteButton.addEventListener('click', (e) => {
         e.preventDefault()
+        })
+    }
 
-    })
 
     // Handle "Get Quote" button as normal form submission
     const getQuoteButton = document.querySelector('.get_quote_form .select_button');
-    getQuoteButton.addEventListener('click', function() {
-        document.querySelector('.get_quote_form').submit();
-    });
+    if (getQuoteButton != null){
+        getQuoteButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.querySelector('.get_quote_form').submit();
+        });
+    }
+
+
+    // Handle "Create Post Get Quote" button as normal form submission
+    const getQuoteContainerButton = document.querySelector('.get_quote_container .select_button');
+    if (getQuoteContainerButton !== null) {
+         getQuoteContainerButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.querySelector('.get_quote_container').submit();
+        });
+    }
+
 });
+
+
+
+
+
 
 
 
@@ -412,53 +478,57 @@ document.addEventListener('DOMContentLoaded', function() {
 let downloadButton = document.getElementById('download-button')
 let pictureBoxQuote = document.getElementById('')
 
-downloadButton.addEventListener('click', (e) => {
+if(downloadButton !== null){
+    downloadButton.addEventListener('click', (e) => {
     e.preventDefault()
 
-    console.log('picStyle inside download', picStyle)
-    console.log('backgroundColor inside download', backgroundColor)
-    console.log('fontcolor inside download', fontColor)
-    console.log('quoteInPic inside download', quoteInPic.innerText)
-    console.log('authorInPic inside download', authorInPic.innerText)
+    if (!picStyle && pictureAuthor.innerHTML == ""){
+        alert('Please Choose a Layout.')
+    } else {
 
-    let imageStyle = picStyle
-    let imageBG = backgroundColor
-    let imageFontColor = fontColor
-    let imageQuote = quoteInPic.innerText
-    let imageAuthor = authorInPic.innerText
+        let imageStyle = picStyle
+        let imageBG = backgroundColor
+        let imageFontColor = fontColor
+        let imageQuote = quoteInPic.innerText
+        let imageAuthor = authorInPic.innerText
 
 
-    // send data  to the backend using AJAX
-    $.ajax({
-        url: "/download-image/",
-        method : "POST",
-        headers: {"X-Requested-With": "XMLHttpRequest",'X-CSRFToken': getCookie("csrftoken")},
-        data: {
-            'image_style': imageStyle,
-            'background_color': imageBG,
-            'font_color': imageFontColor,
-            'quote':imageQuote,
-            'author':imageAuthor,
-            'shadow': shadowFont,
-        },
+        // send data  to the backend using AJAX
+        $.ajax({
+            url: "/download-image/",
+            method : "POST",
+            headers: {"X-Requested-With": "XMLHttpRequest",'X-CSRFToken': getCookie("csrftoken")},
+            data: {
+                'image_style': imageStyle,
+                'background_color': imageBG,
+                'font_color': imageFontColor,
+                'quote':imageQuote,
+                'author':imageAuthor,
+                'shadow': shadowFont,
+                'font_style': fontStyle
+            },
 
-        mode: 'same-origin', // Do not send CSRF token to another domain.
-        csrfmiddlewaretoken: '{% csrf_token %}',
-        xhrFields:{responseType: 'blob' },
-        success: function (response) {
-            let blob = new Blob([response], { type: "image/png" });  // Correct Blob creation
-            let link = document.createElement('a');
-            link.href = URL.createObjectURL(blob); // Create a valid object URL
-            link.download = 'daily_quote.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link); // Cleanup the DOM
-        },
-        error: function (xhr, status, error) {
-            console.log("Error downloading image:", error);
-        }
-    });
+            mode: 'same-origin', // Do not send CSRF token to another domain.
+            csrfmiddlewaretoken: '{% csrf_token %}',
+            xhrFields:{responseType: 'blob' },
+            success: function (response) {
+                let blob = new Blob([response], { type: "image/png" });  // Correct Blob creation
+                let link = document.createElement('a');
+                link.href = URL.createObjectURL(blob); // Create a valid object URL
+                link.download = 'daily_quote.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link); // Cleanup the DOM
+            },
+            error: function (xhr, status, error) {
+                console.log("Error downloading image:", error);
+            }
+        });
+
+    }
 });
+}
+
 
 
 const getCookie = (name) => {
@@ -476,3 +546,124 @@ const getCookie = (name) => {
     }
     return cookieValue;
 }
+
+
+/// expand api data
+document.addEventListener("DOMContentLoaded", function () {
+
+    let apiSectionExpandButton = document.querySelector('.sectionExpand');
+    let apiSectionExpandButtonTwo = document.querySelector('.sectionExpandTwo');
+    let apiSectionExpandButtonThree = document.querySelector('.sectionExpandThree');
+    let apiSectionExpandButtonFour = document.querySelector('.sectionExpandFour');
+    let apiSectionExpandButtonFive = document.querySelector('.sectionExpandFive');
+
+    let expandableBox = document.querySelectorAll('.idBoxMultiInner');
+    let expandableBoxTwo = document.querySelectorAll('.idBoxMultiInnerTwo');
+    let expandableBoxThree = document.querySelectorAll('.idBoxMultiInnerThree');
+    let expandableBoxFour = document.querySelectorAll('.idBoxMultiInnerFour');
+    let expandableBoxFive = document.querySelectorAll('.idBoxMultiInnerFive');
+
+
+    apiSectionExpandButton.addEventListener("click", function () {
+        expandableBox.forEach(section => {
+            let isExpanded = section.getAttribute("aria-expanded") === "true";
+            section.setAttribute("aria-expanded", !isExpanded);
+        });
+
+        apiSectionExpandButton.classList.toggle("active");
+    });
+
+    apiSectionExpandButtonTwo.addEventListener("click", function () {
+        expandableBoxTwo.forEach(section => {
+            let isExpanded = section.getAttribute("aria-expanded") === "true";
+            section.setAttribute("aria-expanded", !isExpanded);
+        });
+
+        apiSectionExpandButtonTwo.classList.toggle("active");
+    });
+
+    apiSectionExpandButtonThree.addEventListener("click", function () {
+        expandableBoxThree.forEach(section => {
+            let isExpanded = section.getAttribute("aria-expanded") === "true";
+            section.setAttribute("aria-expanded", !isExpanded);
+        });
+
+        apiSectionExpandButtonThree.classList.toggle("active");
+    });
+
+    apiSectionExpandButtonFour.addEventListener("click", function () {
+        expandableBoxFour.forEach(section => {
+            let isExpanded = section.getAttribute("aria-expanded") === "true";
+            section.setAttribute("aria-expanded", !isExpanded);
+        });
+
+        apiSectionExpandButtonFour.classList.toggle("active");
+    });
+
+    apiSectionExpandButtonFive.addEventListener("click", function () {
+        expandableBoxFive.forEach(section => {
+            let isExpanded = section.getAttribute("aria-expanded") === "true";
+            section.setAttribute("aria-expanded", !isExpanded);
+        });
+
+        apiSectionExpandButtonFive.classList.toggle("active");
+    });
+});
+
+
+//apiSectionExpandButton.forEach((expand) => {
+//    expand.addEventListener('click', function(e){
+//        e.preventDefault()
+//        this.classList.toggle("active");
+//
+//        expandableBox.forEach((eb) => {
+//            const visibility = eb.getAttribute('aria-expanded')
+//            console.log('visibility', visibility)
+//            if(visibility == "true"){
+//                 eb.setAttribute('aria-expanded', 'false')
+//                } else if (visibility == "false"){
+//                 eb.setAttribute('aria-expanded', 'true');
+//                }
+//            })
+//        })
+//
+//})
+
+let aboutSelectButtons = document.querySelectorAll('.about_select_button');
+
+aboutSelectButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Remove 'active_button' class from all buttons
+        aboutSelectButtons.forEach(btn => btn.classList.remove('active_button'));
+
+        // Add 'active_button' to the clicked button
+        button.classList.add('active_button');
+
+        // Get the selected value
+        let selectedValue = button.value;
+
+        // Send the selected value to the backend using AJAX (fetch API)
+        fetch(window.location.pathname, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': getCookie("csrftoken") // Ensure CSRF token is included
+            },
+            body: new URLSearchParams({ 'selected_value': selectedValue })
+        })
+        .then(response => response.text()) // Expecting an HTML response
+        .then(data => {
+            let parser = new DOMParser();
+            let newDoc = parser.parseFromString(data, "text/html");
+
+            // Update only the section that contains the API results
+            let updatedContent = newDoc.querySelector("#api-results"); // Ensure the backend wraps results in a div with this ID
+            if (updatedContent) {
+                document.querySelector("#api-results").innerHTML = updatedContent.innerHTML;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});

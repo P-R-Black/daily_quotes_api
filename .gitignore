@@ -3,12 +3,12 @@
 *.pot
 *.pyc
 __pycache__/
-development.py
+daily_quotes/settings/production.py
+daily_quotes/settings/development.py
+daily_quotes/db.sqlite3
 db.sqlite3
 db.sqlite3-journal
 media
-
-todo.txt
 
 requirements.txt
 notes.txt
@@ -24,6 +24,7 @@ coverage.xml
 
 # Environments #
 daily_quotes/settings/.env
+daily_quotes/erl_crash.dump
 .env
 .venv
 .env/

@@ -14,6 +14,140 @@
                     <h2>About DrinksAPI</h2>
                 </div>
 
+                <div class="about_page_selection_container">
+                    <form action="" method="post">
+                    {% csrf_token %}
+                        <input type="submit" class="about_select_button active_button" name="selected_value" value="President">
+                        <input type="submit" class="about_select_button" name="selected_value" value="First Lady">
+                        <input type="submit" class="about_select_button" name="selected_value" value="Marcus Aurelius">
+                        <input type="submit" class="about_select_button" name="selected_value" value="Confucius">
+                    </form>
+                    <p>Change quotes by choosing a tag or name above.</p>
+                </div>
+
+                <div class="api_example_container" id="api-results">
+                    <code class="open_curly_rackets">{</code>
+                    <pre class="idBox">
+                        <code class="apiNameTitle">"drfapi": </code>
+                        <code class="api_drink_name">"{{ tags_data.drfapi }}",</code>
+                    </pre>
+                    <div class="sectionExpandContainer">
+                        <div class="sectionExpand">▾</div>
+                        <pre class="idBoxMulti">
+                            <code class="apiNameTitle">"info": </code>
+                            <code class="multiDataContainer">
+                                 <code class="open_curly_rackets">{</code>
+                                    {% for i, j in tags_data.info.items %}
+                                        <code class="idBoxMultiInner" aria-expanded="true">
+                                            <code class="apiNameTitle">"{{ i }}": </code>
+                                            <code class="api_drink_name">"{{ j }}",</code>
+                                        </code>
+                                    {% endfor %}
+                                 <code class="closed_curly_brackets">},</code>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="sectionExpandContainer">
+                        <div class="sectionExpandTwo">▾</div>
+                        <pre class="idBoxMulti">
+                            <code class="apiNameTitle">"servers": </code>
+                            <code class="multiDataContainer">
+                                 <code class="open_curly_rackets">[</code>
+                                {% for i in tags_data.servers %}
+                                <code class="idBoxMultiInnerTwo" aria-expanded="true">
+                                    <code class="apiNameTitle">{{ i }}</code>
+                                </code>
+                                {% endfor %}
+                                 <code class="closed_curly_brackets">],</code>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="sectionExpandContainer">
+                        <div class="sectionExpandThree">▾</div>
+                        <pre class="idBoxMulti">
+                            <code class="apiNameTitle">"external_docs": </code>
+                            <code class="multiDataContainer">
+                                 <code class="open_curly_rackets">{</code>
+                                    {% for i, j in tags_data.external_docs.items %}
+                                        <code class="idBoxMultiInnerThree" aria-expanded="true">
+                                            <code class="apiNameTitle">"{{ i }}": </code>
+                                            <code class="api_drink_name">"{{ j }}",</code>
+                                        </code>
+                                    {% endfor %}
+                                 <code class="closed_curly_brackets">},</code>
+                            </code>
+                        </pre>
+                    </div>
+
+                     <div class="sectionExpandContainer">
+                        <div class="sectionExpandFour">▾</div>
+                        <pre class="idBoxMulti">
+                            <code class="apiNameTitle">"security": </code>
+                            <code class="multiDataContainer">
+                                 <code class="open_curly_rackets">[</code>
+                                {% for i in tags_data.security %}
+                                <code class="idBoxMultiInnerFour" aria-expanded="true">
+                                    {% for t, u in i.items %}
+                                    <code class="apiNameTitle">{{ t }}:</code>
+                                    <code class="api_drink_name">{{ u }}</code>
+                                    {% endfor %}
+                                </code>
+                                {% endfor %}
+                                 <code class="closed_curly_brackets">],</code>
+                            </code>
+                        </pre>
+                    </div>
+                    <div class="sectionExpandContainer">
+                        <div class="sectionExpandFive">▾</div>
+                        <pre class="idBoxMulti">
+                            <code class="apiNameTitle">"quotes": </code>
+                            <code class="multiDataContainer">
+                                 <code class="open_curly_rackets">{</code>
+                                    <code class="idBoxMultiInnerFive" aria-expanded="true">
+                                       <code class="insideIdBoxMultiInner">
+                                            <code class="dataCountContainer">
+                                                <code class="apiNameTitle">"count": </code>
+                                                <code class="api_drink_name">"{{ tags_data.count }}", </code>
+                                            </code>
+                                            <code class="dataNextContainer">
+                                                <code class="apiNameTitle">"next": </code>
+                                                <code class="api_drink_name">"{{ tags_data.next }}", </code>
+                                            </code>
+                                            <code class="dataPrevContainer">
+                                               <code class="apiNameTitle">"previous": </code>
+                                                <code class="api_drink_name">"{{ tags_data.previous }}", </code>
+                                            </code>
+                                            <code class="dataResultsContainer">
+                                                <code class="apiNameTitle">"results": </code>
+                                                <code class="open_curly_rackets api_drink_name">[</code>
+                                            </code>
+
+                                                {% for i  in tags_data.results %}
+                                                <code class="idBoxMultiInnerSix" aria-expanded="true">
+                                                     <code class="results_data_open_curly_rackets">{</code>
+                                                    {% for t, u in i.items %}
+                                                    <code class="resultsDataValueKeyContainer">
+                                                        <code class="apiResultsKey">{{ t }}:</code>
+                                                        <code class="apiResultsValue">{{ u }},</code>
+                                                    </code>
+
+                                                    {% endfor %}
+                                                     <code class="results_data_closed_curly_brackets">},</code>
+                                                </code>
+                                                {% endfor %}
+                                            <code class="results_data_closed_curly_brackets off_closed_bracket">],</code>
+                                            </code>
+                                   </code>
+
+
+                                 <code class="closed_curly_brackets">},</code>
+                            </code>
+                        </pre>
+                    </div>
+
+                    <code class="closed_curly_brackets">}</code>
+                </div>
+
                 <div class="aboutInfoContainer">
                     <div class="aboutDataContainer">
                         <div class="aboutDataTitle">
@@ -69,6 +203,5 @@
         </div>
     </section>
 </main>
-
 {% endblock %}>
 

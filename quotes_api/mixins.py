@@ -11,7 +11,9 @@ class MetadataMixin:
                 "description": "This is the public API for Daily Quotes"
             },
             "servers": [
-                {"url": "/api/v1"}
+                {
+                    "url": "/api/v1"
+                },
             ],
             "external_docs": {
                 "url": "https://www.dailyquotesapi.paulrblack.com/",

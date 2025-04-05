@@ -9,6 +9,7 @@
     min-height: 100vh;
 }
 
+
 .pageTitleContainer{
     display: flex;
     justify-content: center;
@@ -22,6 +23,34 @@
     font-weight: 500;
     text-decoration: none;
 }
+
+.about_page_selection_container{
+    margin-top: 4rem;
+    height: auto;
+}
+
+
+
+.about_page_selection_container form input {
+    margin-right: 1rem;
+
+}
+
+.about_page_selection_container p{
+    color: var(--light-bg-font-color);
+    margin-top: 1rem;
+}
+
+.api_example_container{
+    background: #ded9d94f;
+    border-radius: 5px;
+    height: auto;
+    margin-top: 2rem;
+    padding: 1rem 1rem;
+
+}
+
+
 
 .aboutInfoContainer{
     margin-top: 4rem;
@@ -61,3 +90,256 @@
 
 }
 
+
+/* API DISPLAY */
+.idBox{
+    display: flex;
+    gap: 1rem;
+    margin-left: 2rem;
+}
+
+.sectionExpandContainer{
+    margin-left: 2rem;
+
+}
+
+div.sectionExpand {
+    color: var(--light-bg-font-color);
+    cursor: pointer;
+    width: fit-content;
+    transition: var(--tran-04);
+
+}
+
+
+.active,
+div.sectionExpand:active {
+    transform: rotate(-90deg);
+    transition: var(--tran-05);
+}
+
+
+div.sectionExpandTwo {
+    color: var(--light-bg-font-color);
+    cursor: pointer;
+    width: fit-content;
+    transition: var(--tran-04);
+
+}
+.active,
+div.sectionExpandTwo:active {
+    transform: rotate(-90deg);
+    transition: var(--tran-05);
+}
+
+
+div.sectionExpandThree {
+    color: var(--light-bg-font-color);
+    cursor: pointer;
+    width: fit-content;
+    transition: var(--tran-04);
+
+}
+.active,
+div.sectionExpandThree:active {
+    transform: rotate(-90deg);
+    transition: var(--tran-05);
+}
+
+
+div.sectionExpandFour {
+    color: var(--light-bg-font-color);
+    cursor: pointer;
+    width: fit-content;
+    transition: var(--tran-04);
+
+}
+.active,
+div.sectionExpandFour:active {
+    transform: rotate(-90deg);
+    transition: var(--tran-05);
+}
+
+
+div.sectionExpandFive {
+    color: var(--light-bg-font-color);
+    cursor: pointer;
+    width: fit-content;
+    transition: var(--tran-04);
+
+}
+.active,
+div.sectionExpandFive:active {
+    transform: rotate(-90deg);
+    transition: var(--tran-05);
+}
+
+
+
+.idBoxMulti{
+    display: flex;
+    margin-left: 1rem;
+    margin-top: -1rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+
+
+.multiDataContainer{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: auto;
+
+}
+
+.idBoxMultiInner {
+    display: flex;
+    margin-left: -1.5rem;
+    max-height: 0;  /* Initially collapsed */
+
+    overflow: hidden;
+    transition: var(--tran-05);
+}
+
+.idBoxMultiInner[aria-expanded="true"] {
+    max-height: 10rem;  /* Adjust based on content height */
+    transition: var(--tran-05);
+}
+
+
+.idBoxMultiInnerTwo {
+    display: flex;
+    margin-left: -2.5rem;
+    max-height: 0;  /* Initially collapsed */
+
+    overflow: hidden;
+    transition: var(--tran-05);
+}
+
+.idBoxMultiInnerTwo[aria-expanded="true"] {
+    max-height: 10rem;  /* Adjust based on content height */
+    transition: var(--tran-05);
+}
+
+
+.idBoxMultiInnerThree {
+    display: flex;
+    margin-left: -5.5rem;
+    max-height: 0;  /* Initially collapsed */
+
+    overflow: hidden;
+    transition: var(--tran-05);
+}
+
+.idBoxMultiInnerThree[aria-expanded="true"] {
+    max-height: 10rem;  /* Adjust based on content height */
+    transition: var(--tran-05);
+}
+
+.idBoxMultiInnerFour{
+    display: flex;
+    margin-left: -3rem;
+    max-height: 0;  /* Initially collapsed */
+
+    overflow: hidden;
+    transition: var(--tran-05);
+}
+
+.idBoxMultiInnerFour[aria-expanded="true"]{
+    max-height: 10rem;  /* Adjust based on content height */
+    transition: var(--tran-05);
+}
+
+.idBoxMultiInnerFour code.apiNameTitle{
+    margin-right: .5rem;
+}
+
+.idBoxMultiInnerFour code.api_drink_name{
+    margin-right: .5rem;
+}
+
+
+
+.idBoxMultiInnerFive{
+    display: flex;
+    margin-left: -3rem;
+    max-height: 0;  /* Initially collapsed */
+
+    overflow: hidden;
+    transition: var(--tran-05);
+}
+
+
+.idBoxMultiInnerFive[aria-expanded="true"]{
+    min-height: auto;
+    max-height: 70rem;  /* Adjust based on content height */
+    transition: var(--tran-05);
+}
+
+
+
+
+.multiDataContainer .closed_curly_brackets{
+     margin-left: -2.5rem;
+}
+
+
+.insideIdBoxMultiInner {
+
+
+    display: flex;
+    flex-direction: column;
+    height: auto;  /* Initially collapsed */
+    transition: var(--tran-05);
+}
+
+.idBoxMultiInnerSix {
+    display: flex;
+    flex-direction: column;
+    height: auto;  /* Initially collapsed */
+    margin-left: 2rem;
+    transition: var(--tran-05);
+}
+
+.dataCountContainer, .dataNextContainer, .dataPrevContainer, .dataResultsContainer{
+    display: flex;
+    height: auto;  /* Initially collapsed */
+    transition: var(--tran-05);
+}
+
+
+.apiNameTitle{
+    color: white;
+}
+
+.api_drink_name{
+    color: var(--light-bg-font-color);
+}
+
+.apiResultsKey{
+    color: white;
+    margin-right: .25rem;
+}
+
+.apiResultsValue{
+     color: var(--light-bg-font-color);
+}
+
+.resultsDataValueKeyContainer{
+    display: flex;
+
+}
+
+.results_data_open_curly_rackets,
+.results_data_closed_curly_brackets,
+.open_curly_rackets,
+.closed_curly_brackets{
+    color: var(--light-bg-font-color);
+}
+
+.off_closed_bracket{
+    margin-left: 1.5rem;
+
+}
