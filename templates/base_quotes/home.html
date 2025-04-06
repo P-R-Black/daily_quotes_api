@@ -185,19 +185,6 @@
                         {% csrf_token %}
                         <input type="submit" class="select_button" name="get_quote" value="Get Quote">
                     </form>
-
-                     {% comment %}
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        <div class="get_quote_continer">
-
-                            <button class="select_button">Get Quote</button>
-
-
-                            <input type="submit" class="select_button second_quote_button" value="Get Quote">
-                        </div>
-                    </form>
-                    {% endcomment %}
                 </div>
                 <div class="diagram_download_container">
                     <div class="picture_box_container">
@@ -218,7 +205,7 @@
                             <input type="hidden" name="background_color" id="bgColorInput">
                             <input type="hidden" name="font_color" id="fontColorInput">
                             <input type="hidden" name="quote_text" id="quoteTextInput">
-                            <button type="submit" id="download-button" class="select_button second_quote_button">Download Image</button>
+                            <button type="submit" id="download-button" class="second_quote_button">Download Image</button>
                         </form>
                     </div>
                 </div>

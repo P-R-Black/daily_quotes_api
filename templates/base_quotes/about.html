@@ -1,5 +1,6 @@
 {% extends 'index.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block title %}
     DrinksAPI
@@ -88,8 +89,8 @@
                                 {% for i in tags_data.security %}
                                 <code class="idBoxMultiInnerFour" aria-expanded="true">
                                     {% for t, u in i.items %}
-                                    <code class="apiNameTitle">{{ t }}:</code>
-                                    <code class="api_drink_name">{{ u }}</code>
+                                    <code class="apiNameTitle">"{{ t }}":</code>
+                                    <code class="api_drink_name">"{{ u }}"</code>
                                     {% endfor %}
                                 </code>
                                 {% endfor %}
@@ -127,8 +128,13 @@
                                                      <code class="results_data_open_curly_rackets">{</code>
                                                     {% for t, u in i.items %}
                                                     <code class="resultsDataValueKeyContainer">
-                                                        <code class="apiResultsKey">{{ t }}:</code>
-                                                        <code class="apiResultsValue">{{ u }},</code>
+                                                        <code class="apiResultsKey">"{{ t }}":</code>
+
+                                                        {% if u|string_to_number %}
+                                                            <code class="apiResultsValue">{{ u }}</code>
+                                                        {% else %}
+                                                            <code class="apiResultsValue">"{{ u }}"</code>
+                                                        {% endif %}
                                                     </code>
 
                                                     {% endfor %}
@@ -176,8 +182,8 @@
                         <div class="aboutDataText">
                             <p>
                                 It's an old project that started with the freeCodeCamp frontend quote machine project.
-                                After completing that project I did the proejct again in python, storing hundreds of quotes in
-                                a CVS. After learning the basics of the Django Rest Framework, I wanted to make the quotes
+                                After completing that project I did the proejct again in python, this time storing hundreds of quotes in
+                                a CVS file. After learning the basics of the Django Rest Framework, I wanted to make the quotes
                                 available to anyone that wanted another data set to practice on.
                             </p>
                         </div>

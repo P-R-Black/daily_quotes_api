@@ -8,7 +8,7 @@ import logging
 from quotes_api.models import Quote
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='daily_quotes.log', level=logging.DEBUG, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+logging.basicConfig(filename='daily_quotes.log', level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
 @shared_task
 def set_daily_quote():
