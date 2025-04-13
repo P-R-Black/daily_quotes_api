@@ -25,5 +25,5 @@ environ.Env.read_env()
 urlpatterns = [
     path('', include(('base_quotes.urls', 'base_quotes'), namespace='base_quotes')),
     path('api/', include('quotes_api.urls', namespace='quotes_api')),
-    path('admin/', admin.site.urls),
+    path(env('SECRET_ADMIN_URL') + '/admin/', admin.site.urls),
 ]

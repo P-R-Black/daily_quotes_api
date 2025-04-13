@@ -25,6 +25,7 @@ coverage.xml
 # Environments #
 daily_quotes/settings/.env
 daily_quotes/erl_crash.dump
+*.env
 .env
 .venv
 .env/

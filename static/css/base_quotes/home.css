@@ -486,8 +486,32 @@
 .darkBlueButton{
     cursor: pointer;
     height: 10px;
+    transition: transform 0.3s ease; /* Smooth transition */
     width: 10px;
 }
+
+
+.whiteButton:hover,
+.blackButton:hover,
+.redButton:hover,
+.blueButton:hover,
+.greenButton:hover,
+.orangeButton:hover,
+.yellowButton:hover,
+.violetButton:hover,
+.grayButton:hover,
+.lightBlackButton:hover,
+.pinkButton:hover,
+.lightBlueButton:hover,
+.darkGreenButton:hover,
+.darkPurpleButton:hover,
+.tealButton:hover,
+.darkBlueButton:hover{
+     transform: scale(1.2);
+}
+
+
+
 
 .whiteButton,.whiteFontButton{
     background: #ffffff;
@@ -551,7 +575,21 @@
 .violetFontButton{
     cursor: pointer;
     height: 10px;
+    transition: transform 0.3s ease; /* Smooth transition */
     width: 10px;
+
+}
+
+
+.whiteFontButton:hover,
+.blackFontButton:hover,
+.redFontButton:hover,
+.blueFontButton:hover,
+.greenFontButton:hover,
+.orangeFontButton:hover,
+.yellowFontButton:hover,
+.violetFontButton:hover{
+    transform: scale(1.2);
 
 }
 
@@ -611,6 +649,15 @@
     height: 10px;
     width: 10px;
 }
+
+#noShadowButton:hover,
+#littleShadowButton:hover,
+#mediumShadowButton:hover,
+#largeShadowButton:hover{
+     transform: scale(1.2);
+}
+
+
 
 .shadow_box{
     display: flex;

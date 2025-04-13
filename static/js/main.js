@@ -8,10 +8,6 @@ const modeText = body.querySelector('.mode-text')
 const moon = body.querySelector('.moon')
 const sun = body.querySelector('.sun')
 
-//const mobileMoon = body.querySelector('.mobile-moon')
-//const mobileSun = body.querySelector('.mobile-sun')
-//const mobileSearchBox = body.querySelector('.mobile-search-box')
-//const mobileSearchIcon = body.querySelector('#mobile-search-icon')
 
 
 
@@ -44,8 +40,6 @@ const newStarMaker = () => {
          starIndex += 1;
         }
     }
-
-
 }
 
 
@@ -77,7 +71,6 @@ const darkLightModeToggle = () => {
 if (body.classList.contains("dark") && sun.classList.contains('hide') ){
     console.log('sun',  sun.getAttribute("class"))
 }
-
 
 
 const removeStars = () => {

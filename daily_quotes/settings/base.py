@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+4zd_^_%d*99fw*jfd1s(@75p-5u(u9d)i9gx6#5*^+av*npl-'
+SECRET_KEY = env('DJANGO_SECRET_KEY') # 'django-insecure-+4zd_^_%d*99fw*jfd1s(@75p-5u(u9d)i9gx6#5*^+av*npl-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,10 +82,20 @@ WSGI_APPLICATION = 'daily_quotes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'quotes',
+        'USER': 'quotes',
+        # 'HOST': 'localhost',
+        'PASSWORD': 'paulblack123',
     }
 }
 

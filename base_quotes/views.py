@@ -1,5 +1,5 @@
 from io import BytesIO
-
+from django.views import View
 from django.views.generic import TemplateView
 from django.utils.text import slugify
 from django.shortcuts import render, redirect
@@ -111,43 +111,55 @@ class HomePageView(TemplateView):
         })
 
 
-def about_page(request, *args, **kwargs):
-    api_by_tag = None
+class AboutPageView(View):
+    template_name = 'base_quotes/about.html'
 
-    if not request.POST.get('selected_value'):
-        selected_value = "President"
-    else:
-        selected_value = request.POST.get('selected_value')
+    def get(self, request, *args, **kwargs):
+        return self.handle_request(request)
 
+    def post(self, request, *args, **kwargs):
+        return self.handle_request(request)
 
-    if selected_value:
+    def handle_request(self, request):
+        selected_value = request.POST.get('selected_value') or "President"
+        api_by_tag = None
+
         if Tag.objects.filter(name__iexact=selected_value).exists():
             api_by_tag = requests.get(f'http://localhost:8000/api/v1/quotes/{slugify(selected_value)}')
         elif Author.objects.filter(name__iexact=selected_value).exists():
             api_by_tag = requests.get(f'http://localhost:8000/api/v1/quotes/author/{slugify(selected_value)}')
 
-        full_api_by_tag = api_by_tag.json()
+        if api_by_tag:
+            full_api_by_tag = api_by_tag.json()
 
+            tags_data = {
+                "drfapi": full_api_by_tag['drfapi'],
+                "info": full_api_by_tag['info'],
+                "servers": full_api_by_tag['servers'],
+                "external_docs": full_api_by_tag['external_docs'],
+                "security": full_api_by_tag['security'],
+                "count": full_api_by_tag['quotes']['count'],
+                "next": full_api_by_tag['quotes']['next'],
+                "previous": full_api_by_tag['quotes']['previous'],
+                "results": full_api_by_tag['quotes']['results'],
 
-        tags_data = {
-            "drfapi": full_api_by_tag['drfapi'],
-            "info": full_api_by_tag['info'],
-            "servers": full_api_by_tag['servers'],
-            "external_docs": full_api_by_tag['external_docs'],
-            "security": full_api_by_tag['security'],
-            "count": full_api_by_tag['quotes']['count'],
-            "next": full_api_by_tag['quotes']['next'],
-            "previous": full_api_by_tag['quotes']['previous'],
-            "results": full_api_by_tag['quotes']['results'],
-        }
+            }
+            return render(request, self.template_name, {'tags_data': tags_data})
 
-        # Otherwise, render the full template
-        return render(request, 'base_quotes/about.html', {'tags_data': tags_data})
+        return render(request, self.template_name)
 
-    return render(request, 'base_quotes/about.html')
+class DocsPageView(View):
+    template_name = 'base_quotes/docs.html'
 
-def docs_page(request):
-    return render(request, 'base_quotes/docs.html')
+    def get(self, request, *args, **kwargs):
+        return self.handle_request(request)
+
+    def post(self, request, *args, **kwargs):
+        return self.handle_request(request)
+
+    def handle_request(self, request):
+        return render(request, self.template_name)
+
 
 
 def is_ajax(request):

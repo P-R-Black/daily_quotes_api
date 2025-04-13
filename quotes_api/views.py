@@ -27,8 +27,12 @@ logging.basicConfig(filename='daily_quotes.log', level=logging.DEBUG, format='%(
 
 
 # Create your views here.
+class ReadOnly(BasePermission):
+    def has_permission(self, request, view):
+        return request.method in SAFE_METHODS
+
 class QuotesListV1(MetadataMixin, generics.ListCreateAPIView):
-    permission_classes = [AllowAny] # [HasAPIKey]
+    permission_classes = [ReadOnly] # [HasAPIKey] [AllowAny]
     queryset = Quote.objects.all()
     serializer_class = QuotesSerializerV1
     pagination_class = PageNumberPagination
@@ -54,7 +58,7 @@ class QuotesListV1(MetadataMixin, generics.ListCreateAPIView):
 
 
 class QuotesByTagV1(MetadataMixin, generics.ListAPIView):
-    permission_classes = [AllowAny]
+    permission_classes = [ReadOnly]
     serializer_class = QuotesSerializerV1
     pagination_class = PageNumberPagination
 
@@ -109,7 +113,7 @@ class QuotesByTagV1(MetadataMixin, generics.ListAPIView):
 
 
 class QuotesByAuthorV1(MetadataMixin, generics.ListAPIView):
-    permission_classes = [AllowAny]
+    permission_classes = [ReadOnly]
     serializer_class = QuotesSerializerV1
     pagination_class = PageNumberPagination
 
